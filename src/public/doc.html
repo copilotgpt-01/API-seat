@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Documentación de API - Recuperación de Contraseña</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      section {
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #007bff;
+      }
+
+      code {
+        display: block;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #eee;
+        border-left: 3px solid #007bff;
+        color: #333;
+        font-family: monospace;
+        overflow-x: auto;
+      }
+
+      ul {
+        margin: 10px 0;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Documentación de API para Recuperación de Contraseña</h1>
+    <p>
+      Esta documentación cubre los endpoints utilizados para la recuperación de
+      contraseña en nuestra aplicación.
+    </p>
+
+    <section>
+      <h2>Endpoint: Olvidé mi Contraseña (forgotPassword)</h2>
+      <p><strong>Método HTTP:</strong> POST</p>
+      <p>
+        <strong>URL:</strong> http://localhost:3000/api/v1/user/forgot-password
+      </p>
+      <p>
+        <strong>Cuerpo de la solicitud:</strong> { "email":
+        "usuario@example.com" }
+      </p>
+      <p><strong>Descripción del flujo:</strong></p>
+      <ul>
+        <li>Validación de la solicitud y búsqueda del usuario.</li>
+        <li>
+          Generación y envío del token de restablecimiento por correo
+          electrónico.
+        </li>
+        <li>Respuesta indicando el éxito del envío del correo.</li>
+      </ul>
+      <p><strong>Ejemplo de uso:</strong></p>
+      <code
+        >curl -X POST -H "Content-Type: application/json" -d '{"email":
+        "usuario@example.com"}' http://localhost:5000/api/forgot-password</code
+      >
+    </section>
+
+    <section>
+      <h2>Endpoint: Restablecer Contraseña (resetPassword)</h2>
+      <p><strong>Método HTTP:</strong> POST</p>
+      <p>
+        <strong>URL:</strong>
+        http://localhost:3000/api/v1/user/reset-password/:token
+      </p>
+      <p>
+        <strong>Cuerpo de la solicitud:</strong> { "newPassword":
+        "nuevaContraseña123" }
+      </p>
+      <p><strong>Descripción del flujo:</strong></p>
+      <ul>
+        <li>Validación del token y actualización de la contraseña.</li>
+        <li>Limpieza de datos de restablecimiento de la contraseña.</li>
+        <li>
+          Respuesta indicando el éxito del restablecimiento de la contraseña.
+        </li>
+      </ul>
+      <p><strong>Ejemplo de uso:</strong></p>
+      <code
+        >curl -X POST -H "Content-Type: application/json" -d '{"newPassword":
+        "nuevaContraseña123"}'
+        http://localhost:5000/api/reset-password/abc123token</code
+      >
+    </section>
+
+    <section>
+      <h2>Endpoint: Eliminar Usuario (delete)</h2>
+      <p><strong>Método HTTP:</strong> DELETE</p>
+      <p><strong>URL:</strong> http://localhost:3000/api/v1/user/:id</p>
+      <p><strong>Descripción del flujo:</strong></p>
+      <ul>
+        <li>Búsqueda del usuario por ID.</li>
+        <li>Eliminación del usuario si es encontrado.</li>
+        <li>Respuesta indicando el éxito de la operación.</li>
+      </ul>
+      <p><strong>Ejemplo de uso:</strong></p>
+      <code>curl -X DELETE http://localhost:5000/api/123</code>
+    </section>
+
+    <section>
+      <h2>Endpoint: Actualizar Usuario (update)</h2>
+      <p><strong>Método HTTP:</strong> PUT</p>
+      <p><strong>URL:</strong> http://localhost:3000/api/v1/user/:id</p>
+      <p>
+        <strong>Cuerpo de la solicitud:</strong> { "name": "Nuevo Nombre",
+        "email": "nuevo@example.com" }
+      </p>
+      <p><strong>Descripción del flujo:</strong></p>
+      <ul>
+        <li>Búsqueda del usuario por ID.</li>
+        <li>Actualización de la información del usuario.</li>
+        <li>Respuesta con los datos del usuario actualizado.</li>
+      </ul>
+      <p><strong>Ejemplo de uso:</strong></p>
+      <code
+        >curl -X PUT -H "Content-Type: application/json" -d '{"name": "Nuevo
+        Nombre", "email": "nuevo@example.com"}'
+        http://localhost:5000/api/123</code
+      >
+    </section>
+  </body>
+</html>
